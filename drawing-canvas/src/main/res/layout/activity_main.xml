@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="wachi.drawingview.MainActivity">
+
+    <wachi.drawingview.WachiDrawingView
+        android:id="@+id/wachi_drawing_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+    <Button
+        android:id="@+id/eraser"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Eraser"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:textSize="24sp"/>
+
+    <Button
+        android:id="@+id/brush"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Brush"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@+id/eraser"
+        android:textSize="24sp"/>
+
+    <Button
+        android:id="@+id/undo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Undo"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@+id/brush"
+        android:textSize="24sp"/>
+
+    <Button
+        android:id="@+id/redo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Redo"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@+id/undo"
+        android:textSize="24sp"/>
+
+    <Button
+        android:id="@+id/load_img"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Load"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@+id/redo"
+        android:textSize="24sp"/>
+
+    <Button
+        android:id="@+id/pen_stroke_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="P1"
+        app:layout_constraintBottom_toTopOf="@id/eraser"
+        android:textSize="24sp"/>
+
+    <Button
+        android:id="@+id/pen_stroke_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="P2"
+        app:layout_constraintLeft_toRightOf="@id/pen_stroke_1"
+        app:layout_constraintBottom_toTopOf="@id/eraser"
+        android:textSize="24sp"/>
+
+    <Button
+        android:id="@+id/pen_stroke_3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="P3"
+        app:layout_constraintLeft_toRightOf="@id/pen_stroke_2"
+        app:layout_constraintBottom_toTopOf="@id/eraser"
+        android:textSize="24sp"/>
+
+    <Button
+        android:id="@+id/pen_color_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="red"
+        app:layout_constraintLeft_toRightOf="@id/pen_stroke_3"
+        app:layout_constraintBottom_toTopOf="@id/eraser"
+        android:textSize="24sp"/>
+
+    <Button
+        android:id="@+id/pen_color_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="yellow"
+        app:layout_constraintLeft_toRightOf="@id/pen_color_1"
+        app:layout_constraintBottom_toTopOf="@id/eraser"
+        android:textSize="24sp"/>
+
+    <Button
+        android:id="@+id/pen_color_3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="black"
+        app:layout_constraintLeft_toRightOf="@id/pen_color_2"
+        app:layout_constraintBottom_toTopOf="@id/eraser"
+        android:textSize="24sp"/>
+
+
+</android.support.constraint.ConstraintLayout>

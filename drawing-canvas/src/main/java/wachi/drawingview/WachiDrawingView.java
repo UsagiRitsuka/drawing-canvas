@@ -316,4 +316,23 @@ public class WachiDrawingView extends View {
             }
         });
     }
+
+    public void loadImage(Bitmap bitmap){
+        loadedBitmap = ScalingUtilities.createScaledBitmap(bitmap, originalWidth, originalHeight,
+                ScalingUtilities.ScalingLogic.FIT);
+        if(loadedCanvas == null){
+            loadedCanvas = new Canvas(loadedBitmap);
+        } else {
+            loadedCanvas.setBitmap(loadedBitmap);
+        }
+
+        ThreadManager.getInstance().postToUIThread(new Runnable() {
+            @Override
+            public void run() {
+                invalidate();
+            }
+        });
+    }
+
+
 }

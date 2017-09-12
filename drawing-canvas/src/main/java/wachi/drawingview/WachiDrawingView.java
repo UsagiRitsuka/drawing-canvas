@@ -317,7 +317,7 @@ public class WachiDrawingView extends View {
         });
     }
 
-    public void loadImage(Bitmap bitmap){
+    public void loadImg(Bitmap bitmap){
         loadedBitmap = ScalingUtilities.createScaledBitmap(bitmap, originalWidth, originalHeight,
                 ScalingUtilities.ScalingLogic.FIT);
         if(loadedCanvas == null){

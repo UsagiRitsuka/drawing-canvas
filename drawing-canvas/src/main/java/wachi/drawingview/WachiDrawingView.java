@@ -112,6 +112,13 @@ public class WachiDrawingView extends View {
     }
 
     @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+//        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+
+        setMeasuredDimension(originalWidth, originalHeight);
+    }
+
+    @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         adjustCanvas(canvas);

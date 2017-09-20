@@ -15,6 +15,7 @@ import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.ScaleGestureDetector;
 import android.view.View;
+import android.view.WindowManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -134,7 +135,7 @@ public class WachiDrawingView extends View {
         }
 
         if(loadedBitmap != null){
-            Log.v(TAG, "loadedBitmap != null");
+//            Log.v(TAG, "loadedBitmap != null");
             canvas.drawBitmap(loadedBitmap, 0, 0, null);
         }
     }
@@ -264,7 +265,7 @@ public class WachiDrawingView extends View {
                 bufferCanvas.drawPath(pathTraker, pathTraker.getPaint());
             }
 
-            Log.v(TAG, "size pathTrakerList" + pathTrakerList.size());
+//            Log.v(TAG, "size pathTrakerList" + pathTrakerList.size());
             invalidate();
         }
     }
@@ -276,7 +277,7 @@ public class WachiDrawingView extends View {
             bufferCanvas.drawPath(pathTraker, pathTraker.getPaint());
         }
 
-        Log.v(TAG, "size pathTrakerList/redoPathList : " + pathTrakerList.size() + "/" + redoPathList.size());
+//        Log.v(TAG, "size pathTrakerList/redoPathList : " + pathTrakerList.size() + "/" + redoPathList.size());
         invalidate();
     }
 
@@ -341,5 +342,21 @@ public class WachiDrawingView extends View {
         });
     }
 
+    public Bitmap getViewBitmap(){
+        // configuramos para que la view almacene la cache en una imagen
+        setDrawingCacheEnabled(true);
+        setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_LOW);
+        buildDrawingCache();
+
+        if(getDrawingCache() == null) return null; // Verificamos antes de que no sea null
+
+        // utilizamos esa cache, para crear el bitmap que tendra la imagen de la view actual
+        Bitmap bitmap = Bitmap.createBitmap(getDrawingCache());
+        setDrawingCacheEnabled(false);
+        destroyDrawingCache();
+
+
+        return bitmap;
+    }
 
 }

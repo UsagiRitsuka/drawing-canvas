@@ -106,4 +106,19 @@
         app:layout_constraintLeft_toRightOf="@id/pen_color_2"
         app:layout_constraintBottom_toTopOf="@id/eraser"
         android:textSize="24sp"/>
+
+    <ImageView
+        android:id="@+id/test"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
+
+    <Button
+        android:id="@+id/save"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="save and show"/>
+
 </android.support.constraint.ConstraintLayout>

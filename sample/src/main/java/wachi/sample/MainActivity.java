@@ -1,10 +1,14 @@
 package wachi.sample;
 
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
+
+import com.bumptech.glide.Glide;
 
 import wachi.drawingview.WachiDrawingView;
 
@@ -21,6 +25,8 @@ public class MainActivity extends AppCompatActivity {
     private Button yellow;
     private Button black;
     private Button loadImg;
+    private Button saveAndShow;
+    private ImageView test;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +50,8 @@ public class MainActivity extends AppCompatActivity {
         yellow = findViewById(R.id.pen_color_2);
         black = findViewById(R.id.pen_color_3);
         loadImg = findViewById(R.id.load_img);
+        saveAndShow = findViewById(R.id.save);
+        test = findViewById(R.id.test);
     }
 
     private void setupComponent(){
@@ -126,5 +134,21 @@ public class MainActivity extends AppCompatActivity {
                 drawingView.loadImg(R.drawable.test);
             }
         });
+
+        saveAndShow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                saveAndShow();
+            }
+        });
     }
+
+    private void saveAndShow(){
+        test.setVisibility(View.VISIBLE);
+        Bitmap bitmap = drawingView.getViewBitmap();
+        if(bitmap != null) {
+            test.setImageBitmap(bitmap);
+        }
+    }
+
 }

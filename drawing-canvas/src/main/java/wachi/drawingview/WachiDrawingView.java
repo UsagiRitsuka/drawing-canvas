@@ -17,6 +17,7 @@ import android.view.ScaleGestureDetector;
 import android.view.View;
 import android.view.WindowManager;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -354,7 +355,6 @@ public class WachiDrawingView extends View {
         Bitmap bitmap = Bitmap.createBitmap(getDrawingCache());
         setDrawingCacheEnabled(false);
         destroyDrawingCache();
-
 
         return bitmap;
     }

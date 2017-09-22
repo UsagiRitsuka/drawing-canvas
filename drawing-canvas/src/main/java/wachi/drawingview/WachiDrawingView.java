@@ -356,6 +356,8 @@ public class WachiDrawingView extends View {
         setDrawingCacheEnabled(false);
         destroyDrawingCache();
 
+
+        bitmap = ScalingUtilities.createScaledBitmap(bitmap, originalWidth, originalHeight, ScalingUtilities.ScalingLogic.FIT);
         return bitmap;
     }
 

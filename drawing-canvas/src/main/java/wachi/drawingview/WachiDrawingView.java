@@ -364,7 +364,13 @@ public class WachiDrawingView extends View {
 //        bitmap = ScalingUtilities.createScaledBitmap(bitmap, width, height, ScalingUtilities.ScalingLogic.FIT);
 //        return bitmap;
 
-        return ScalingUtilities.createScaledBitmap(bufferBitmap, width, height, ScalingUtilities.ScalingLogic.FIT);
+
+        Bitmap bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bitmap);
+        canvas.drawBitmap(bufferBitmap, 0, 0, null);
+        canvas.drawBitmap(loadedBitmap, 0, 0, null);
+
+        return ScalingUtilities.createScaledBitmap(bitmap, width, height, ScalingUtilities.ScalingLogic.FIT);
     }
 
 }

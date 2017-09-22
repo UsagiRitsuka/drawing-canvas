@@ -344,6 +344,10 @@ public class WachiDrawingView extends View {
     }
 
     public Bitmap getViewBitmap(){
+        return getViewBitmap(originalWidth, originalHeight);
+    }
+
+    public Bitmap getViewBitmap(int width, int height){
         // configuramos para que la view almacene la cache en una imagen
         setDrawingCacheEnabled(true);
         setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_LOW);
@@ -357,7 +361,7 @@ public class WachiDrawingView extends View {
         destroyDrawingCache();
 
 
-        bitmap = ScalingUtilities.createScaledBitmap(bitmap, originalWidth, originalHeight, ScalingUtilities.ScalingLogic.FIT);
+        bitmap = ScalingUtilities.createScaledBitmap(bitmap, width, height, ScalingUtilities.ScalingLogic.FIT);
         return bitmap;
     }
 

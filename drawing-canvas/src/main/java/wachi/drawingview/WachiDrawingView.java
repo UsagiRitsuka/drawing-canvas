@@ -327,13 +327,8 @@ public class WachiDrawingView extends View {
     }
 
     public void loadImg(Bitmap bitmap){
-        loadedBitmap = ScalingUtilities.createScaledBitmap(bitmap, originalWidth, originalHeight,
+        bufferBitmap = ScalingUtilities.createScaledBitmap(bitmap, originalWidth, originalHeight,
                 ScalingUtilities.ScalingLogic.FIT);
-        if(loadedCanvas == null){
-            loadedCanvas = new Canvas(loadedBitmap);
-        } else {
-            loadedCanvas.setBitmap(loadedBitmap);
-        }
 
         ThreadManager.getInstance().postToUIThread(new Runnable() {
             @Override
@@ -348,7 +343,13 @@ public class WachiDrawingView extends View {
      * @param bitmap
      */
     public void setLoadedBitmap(Bitmap bitmap){
-        loadedBitmap = bitmap;
+        loadedBitmap = ScalingUtilities.createScaledBitmap(bitmap, originalWidth, originalHeight,
+                ScalingUtilities.ScalingLogic.FIT);
+        if(loadedCanvas == null){
+            loadedCanvas = new Canvas(loadedBitmap);
+        } else {
+            loadedCanvas.setBitmap(loadedBitmap);
+        }
     }
 
     public Bitmap getViewBitmap(){

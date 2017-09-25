@@ -351,6 +351,13 @@ public class WachiDrawingView extends View {
         } else {
             loadedCanvas.setBitmap(loadedBitmap);
         }
+
+        ThreadManager.getInstance().postToUIThread(new Runnable() {
+            @Override
+            public void run() {
+                invalidate();
+            }
+        });
     }
 
     public Bitmap getViewBitmap(){
@@ -359,22 +366,6 @@ public class WachiDrawingView extends View {
 
     public Bitmap getViewBitmap(int width, int height){
         // configuramos para que la view almacene la cache en una imagen
-//        setDrawingCacheEnabled(true);
-//        setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_LOW);
-//        buildDrawingCache();
-//
-//        if(getDrawingCache() == null) return null; // Verificamos antes de que no sea null
-//
-//        // utilizamos esa cache, para crear el bitmap que tendra la imagen de la view actual
-//        Bitmap bitmap = Bitmap.createBitmap(getDrawingCache());
-//        setDrawingCacheEnabled(false);
-//        destroyDrawingCache();
-//
-//
-//        bitmap = ScalingUtilities.createScaledBitmap(bitmap, width, height, ScalingUtilities.ScalingLogic.FIT);
-//        return bitmap;
-
-
         Bitmap bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(bitmap);
 

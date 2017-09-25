@@ -343,6 +343,14 @@ public class WachiDrawingView extends View {
         });
     }
 
+    /**
+     * just set bitmap which draw on last step
+     * @param bitmap
+     */
+    public void setLoadedBitmap(Bitmap bitmap){
+        loadedBitmap = bitmap;
+    }
+
     public Bitmap getViewBitmap(){
         return getViewBitmap(originalWidth, originalHeight);
     }
@@ -367,6 +375,7 @@ public class WachiDrawingView extends View {
 
         Bitmap bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(bitmap);
+
         canvas.drawBitmap(bufferBitmap, 0, 0, null);
         canvas.drawBitmap(loadedBitmap, 0, 0, null);
 

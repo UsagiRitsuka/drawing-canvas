@@ -331,6 +331,7 @@ public class WachiDrawingView extends View {
                 ScalingUtilities.ScalingLogic.FIT);
 
         bufferCanvas.drawBitmap(bitmap, 0, 0, null);
+        newStartBitmap = bitmap;
         ThreadManager.getInstance().postToUIThread(new Runnable() {
             @Override
             public void run() {

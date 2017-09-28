@@ -16,7 +16,7 @@ public class PathTraker extends Path {
     private Paint paint;
     private Point startPoint;
     private List<Point> traker;
-
+    private boolean isBucket = false;
 
     public PathTraker(Point startPoint){
         startPoint = startPoint;
@@ -55,4 +55,13 @@ public class PathTraker extends Path {
     public void setPaint(Paint paint) {
         this.paint = new Paint(paint);
     }
+
+    public boolean isBucket() {
+        return isBucket;
+    }
+
+    public void setBucket(boolean bucket) {
+        isBucket = bucket;
+    }
 }
+

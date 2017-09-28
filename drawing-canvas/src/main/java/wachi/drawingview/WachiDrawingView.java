@@ -15,12 +15,11 @@ import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.ScaleGestureDetector;
 import android.view.View;
-import android.view.WindowManager;
 
-import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import wachi.drawingview.floodfill.QueueLinearFloodFiller;
 import wachi.drawingview.floodfill.ScalingUtilities;
 import wachi.drawingview.manager.ThreadManager;
 
@@ -63,6 +62,9 @@ public class WachiDrawingView extends View {
     private int originalHeight = 0;
     private Canvas loadedCanvas;
     private Bitmap loadedBitmap;
+    private int targetColor = -1;
+    private boolean isBucket = false;
+    private QueueLinearFloodFiller queueLinearFloodFiller;
 
     public WachiDrawingView(Context context){
         super(context);
@@ -196,8 +198,10 @@ public class WachiDrawingView extends View {
             curPath.setEraser(isEraser);
             curPath.setPaint(paint);
             curPath.moveTo(x, y);
-
+            curPath.setStartPoint(new Point((int)x, (int)y));
+            curPath.setBucket(isBucket);
             redoPathList.clear();
+            targetColor = bufferBitmap.getPixel((int)x, (int)y);
         }
     }
 
@@ -207,7 +211,7 @@ public class WachiDrawingView extends View {
      */
     private void actionMove(float x, float y){
         if(isInCanvas(x, y)) {
-            if (isDrawing) {
+            if (isDrawing && !curPath.isBucket()) {
                 curPath.quadTo(lastPosition.x, lastPosition.y, (lastPosition.x + x) / 2, (lastPosition.y + y) / 2);
                 lastPosition.set((int) x, (int) y);
 
@@ -221,7 +225,12 @@ public class WachiDrawingView extends View {
     private void actionUp(){
         if(isDrawing) {
             if(!isEraser) {
-                bufferCanvas.drawPath(curPath, paint);
+                if(!curPath.isBucket()) {
+                    bufferCanvas.drawPath(curPath, paint);
+                } else{
+                    queueLinearFloodFiller = new QueueLinearFloodFiller(bufferBitmap, targetColor, paint.getColor());
+                    queueLinearFloodFiller.floodFill(curPath.getStartPoint().x, curPath.getStartPoint().y);
+                }
             }
 
             pathTrakerList.add(curPath);
@@ -248,11 +257,19 @@ public class WachiDrawingView extends View {
 
     public void change2Eraser(){
         isEraser = true;
+        isBucket = false;
         paint.setXfermode(clearMode);
     }
 
     public void change2Brush(){
         isEraser = false;
+        isBucket = false;
+        paint.setXfermode(null);
+    }
+
+    public void change2Bucket(){
+        isEraser = false;
+        isBucket = true;
         paint.setXfermode(null);
     }
 
@@ -283,11 +300,9 @@ public class WachiDrawingView extends View {
     }
 
     public void setColor(int color){
-        if(!isEraser) {
             int alpha = paint.getAlpha();
             paint.setColor(color);
             paint.setAlpha(alpha);
-        }
     }
 
     public void setStrokeWidth(int strokeWidth){
@@ -375,5 +390,6 @@ public class WachiDrawingView extends View {
 
         return ScalingUtilities.createScaledBitmap(bitmap, width, height, ScalingUtilities.ScalingLogic.FIT);
     }
+
 
 }

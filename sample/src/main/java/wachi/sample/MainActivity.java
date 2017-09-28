@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
     private Button black;
     private Button loadImg;
     private Button saveAndShow;
-    private ImageView test;
+    private Button bucket;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
         black = findViewById(R.id.pen_color_3);
         loadImg = findViewById(R.id.load_img);
         saveAndShow = findViewById(R.id.save);
-        test = findViewById(R.id.test);
+        bucket = findViewById(R.id.bucket);
     }
 
     private void setupComponent(){
@@ -131,24 +131,16 @@ public class MainActivity extends AppCompatActivity {
         loadImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                drawingView.loadImg(R.drawable.test);
+                drawingView.loadImg(R.drawable.test02);
             }
         });
 
-        saveAndShow.setOnClickListener(new View.OnClickListener() {
+        bucket.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                saveAndShow();
+                drawingView.change2Bucket();
             }
         });
-    }
-
-    private void saveAndShow(){
-        test.setVisibility(View.VISIBLE);
-        Bitmap bitmap = drawingView.getViewBitmap();
-        if(bitmap != null) {
-            test.setImageBitmap(bitmap);
-        }
     }
 
 }

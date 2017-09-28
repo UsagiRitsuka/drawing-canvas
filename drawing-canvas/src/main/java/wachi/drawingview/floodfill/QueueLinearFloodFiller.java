@@ -25,7 +25,7 @@ public class QueueLinearFloodFiller
 	private boolean[] 			  pixelsChecked;
 	private Queue<FloodFillRange> ranges;
 	private int targetColor;
-
+	private Bitmap targetBitmap;
 	//Construct using an image and a copy will be made to fill into,
 	//Construct with BufferedImage and flood fill will write directly to provided BufferedImage
 	public QueueLinearFloodFiller(Bitmap img)
@@ -33,6 +33,9 @@ public class QueueLinearFloodFiller
 		copyImage(img);
 	}
 
+	public void setTargetBitmap(Bitmap bitmap){
+		targetBitmap = bitmap;
+	}
 	public QueueLinearFloodFiller(Bitmap img, int targetColor, int newColor)
 	{
 		useImage(img);
@@ -169,6 +172,7 @@ public class QueueLinearFloodFiller
 		}
 
 		image.setPixels(pixels, 0, width, 0, 0, width, height);
+//		targetBitmap.setPixels(pixels, 0, width, 0, 0, width, height);
 	}
 
 	// Finds the furthermost left and right boundaries of the fill area
